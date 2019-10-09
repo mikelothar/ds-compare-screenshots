@@ -37,24 +37,24 @@ const shoot = compare => {
     else await page.emulate(devices[urlAndDevice.device])
 
     await page.goto(url)
-    await page.waitFor(Number(6000))
+    // await page.waitFor(Number(500))
 
     let cssSelector = '.seen_button.js-seen'
     if (await page.$(cssSelector)) {
       await page.click(cssSelector)
-      await page.waitFor(Number(500))
+      await page.waitFor(Number(200))
     }
 
     cssSelector = '#ensCloseBanner'
     if (await page.$(cssSelector)) {
       await page.click(cssSelector)
-      await page.waitFor(Number(500))
+      await page.waitFor(Number(200))
     }
 
     cssSelector = '.close-btn.notifications-item-close-button'
     if (await page.$(cssSelector)) {
       await page.click(cssSelector)
-      await page.waitFor(Number(500))
+      await page.waitFor(Number(200))
     }
 
     if (compare.el) {
