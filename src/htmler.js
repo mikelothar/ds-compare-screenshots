@@ -1,7 +1,6 @@
 const fs = require('fs')
 const utils = require('./utils')
 const style = require('./style')
-const mkdirp = require('mkdirp')
 
 const head = title => {
   return `
@@ -35,16 +34,15 @@ const baseHtml = (imgArr, compare, urlAndDevice) => {
       ${trHtml(imgArr, compare, urlAndDevice)}
       </table>
     </body>
-    </html>`
+    </html>`.replace(/,/g, '')
 }
 
 const trHtml = (imgArr, compare, urlAndDevice) => {
   const tdEls = imgArr.map(file => {
-    const baseFile = `.${utils.outputShotsPath(compare.base.env, compare.base.date, urlAndDevice.device)}/${file}`
-    const shotFile = `.${utils.outputShotsPath(compare.shoot.env, compare.shoot.date, urlAndDevice.device)}/${file}`
-    const diffFile = `.${utils.outputDiffPath(compare, urlAndDevice.device)}/${file}`
+    const baseFile = `${utils.outputShotsPath(compare.base.env, compare.base.date, urlAndDevice.device).replace('/output', '')}/${file}`
+    const shotFile = `${utils.outputShotsPath(compare.shoot.env, compare.shoot.date, urlAndDevice.device).replace('/output', '')}/${file}`
+    const diffFile = `${utils.outputDiffPath(compare, urlAndDevice.device).replace('/output', '')}/${file}`
 
-    console.log(baseFile)
     let tds = `<td><img src="${baseFile}" title="${file}"></td>`
     tds += `<td><img src="${shotFile}" title="${file}"></td>`
     tds += `<td><img src="${diffFile}" title="${file}"></td>`

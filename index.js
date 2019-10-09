@@ -16,17 +16,11 @@ const compare = {
     // env: 'web.develop.danskespil.dk',
     // env: 'danskespil.dk',
     env: 'town21.danskespil.dk',
-    date: timeNow,
+    // date: timeNow,
+    date: '20191008',
   },
   desktopWidth: 1600,
-  devices: [
-    'Desktop',
-    'iPhone 7',
-    'iPad',
-    'iPad landscape',
-    'iPad Pro',
-    'iPad Pro landscape'
-  ],
+  devices: ['Desktop', 'iPhone 7', 'iPad', 'iPad landscape', 'iPad Pro', 'iPad Pro landscape'],
   urls: [
     '',
     '/alt-eller-intet',
