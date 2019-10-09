@@ -1,0 +1,25 @@
+{
+  "name": "ds-compare-screenshots",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "serve": "lite-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "delete": "^1.1.0",
+    "lite-server": "^2.5.4",
+    "merge-img": "^2.1.3",
+    "mkdirp": "^0.5.1",
+    "node-cmd": "^3.0.0",
+    "pixelmatch": "^5.1.0",
+    "png-crop": "0.0.2",
+    "prettier": "^1.18.2",
+    "pretty-ms": "^5.0.0",
+    "screenshoteer": "^1.0.9"
+  }
+}
