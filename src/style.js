@@ -13,7 +13,17 @@ const css = `
   .markdown-body {
     padding: 15px;
   }
-}`
+}
+
+table th {
+  overflow: hidden;
+}
+
+table td {
+  vertical-align: top;
+  width: 33.3333%;
+}
+`
 
 module.exports = {
   css,
