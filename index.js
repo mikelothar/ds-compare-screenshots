@@ -1,49 +1,12 @@
 const init = require('./src/init')
+const utils = require('./src/utils')
 
-const timeNow = new Date()
-  .toISOString()
-  .split('T')[0]
-  .replace(/-/g, '')
-
-const el = {
-  fullpage: null,
-  header: 'header.header',
-}
-
-const base = {
-  prod: {
-    env: 'danskespil.dk',
-    date: '20191009',
-  },
-  town21: {
-    env: 'town21.danskespil.dk',
-    date: '20191009',
-  },
-  develop: {
-    env: 'web.develop.danskespil.dk',
-    date: '20191008',
-  },
-}
-
-const shoot = {
-  prod: {
-    env: 'danskespil.dk',
-    date: timeNow,
-  },
-  town21: {
-    env: 'town21.danskespil.dk',
-    date: timeNow,
-  },
-  develop: {
-    env: 'web.develop.danskespil.dk',
-    date: timeNow,
-  },
-}
+const params = utils.params(process.argv)
 
 const compare = {
-  el: el.fullpage,
-  base: base.town21,
-  shoot: shoot.town21,
+  el: params.el,
+  base: { env: params.baseEnv, date: params.baseDate },
+  shoot: { env: params.shootEnv, date: params.shootDate },
   desktopWidth: 1600,
   devices: ['Desktop', 'iPhone 7', 'iPad', 'iPad landscape', 'iPad Pro', 'iPad Pro landscape'],
   urls: [

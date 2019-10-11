@@ -1,4 +1,57 @@
+const program = require('commander')
 const mkdirp = require('mkdirp')
+const { readdirSync, statSync } = require('fs')
+const { join } = require('path')
+
+const params = args => {
+  const timeNow = new Date()
+    .toISOString()
+    .split('T')[0]
+    .replace(/-/g, '')
+
+  const output = {}
+  program
+    .option('--base-env, [baseEnv]')
+    .option('--base-date, [baseDate]')
+    .option('--shoot-env, [shootEnv]')
+    .option('--shoot-date, [shootDate]')
+    .option('--el, [el]')
+    .parse(args)
+
+  output.baseEnv = program.baseEnv || 'danskespil.dk'
+  output.baseDate = program.baseDate || 'latest'
+  output.shootEnv = program.shootEnv || 'danskespil.dk'
+  output.shootDate = program.shootDate || timeNow
+  output.el = program.el || 'body'
+
+  if (output.shootDate === 'now') output.shootDate = timeNow
+  if (output.el === 'body') output.el = null
+
+  const dirs = p => readdirSync(p).filter(f => statSync(join(p, f)).isDirectory())
+
+  if (output.baseDate === 'latest') {
+    const dateDirPath = `./output/shots/${output.baseEnv}`
+    mkdirp(dateDirPath, function(err) {})
+    const dateDirs = dirs(dateDirPath)
+    if (dateDirs.length === 0) {
+      output.baseDate = timeNow
+      return
+    }
+    dateDirs.sort()
+    let newest = dateDirs.pop()
+    if (newest === timeNow) {
+      if (dateDirs.length > 0) {
+        newest = dateDirs.pop()
+      } else {
+        output.baseDate = timeNow
+        return
+      }
+    }
+    output.baseDate = newest
+  }
+
+  return output
+}
 
 const devicePath = device => {
   return device.replace(/ /g, '-').toLowerCase()
@@ -59,4 +112,5 @@ module.exports = {
   outputShotsFile,
   outputDiffPath,
   outputDiffFile,
+  params,
 }
