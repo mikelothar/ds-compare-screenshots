@@ -1,15 +1,15 @@
 const program = require('commander')
 const mkdirp = require('mkdirp')
-const { readdirSync, statSync } = require('fs')
+const { readdirSync, statSync, existsSync } = require('fs')
 const { join } = require('path')
 
 const params = args => {
+  const output = {}
   const timeNow = new Date()
     .toISOString()
     .split('T')[0]
     .replace(/-/g, '')
 
-  const output = {}
   program
     .option('--base-env, [baseEnv]')
     .option('--base-date, [baseDate]')
@@ -29,13 +29,18 @@ const params = args => {
 
   const dirs = p => readdirSync(p).filter(f => statSync(join(p, f)).isDirectory())
 
+  const dateDirPath = `./output/shots/${output.baseEnv}`
+
+  if (!existsSync(dateDirPath)) {
+    output.baseDate = timeNow
+    return output
+  }
+
   if (output.baseDate === 'latest') {
-    const dateDirPath = `./output/shots/${output.baseEnv}`
-    mkdirp(dateDirPath, function(err) {})
     const dateDirs = dirs(dateDirPath)
     if (dateDirs.length === 0) {
       output.baseDate = timeNow
-      return
+      return output
     }
     dateDirs.sort()
     let newest = dateDirs.pop()
@@ -44,7 +49,7 @@ const params = args => {
         newest = dateDirs.pop()
       } else {
         output.baseDate = timeNow
-        return
+        return output
       }
     }
     output.baseDate = newest
