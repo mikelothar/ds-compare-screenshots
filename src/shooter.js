@@ -37,7 +37,7 @@ const shoot = compare => {
     else await page.emulate(devices[urlAndDevice.device])
 
     await page.goto(url)
-    // await page.waitFor(Number(500))
+    await page.waitFor(Number(2000))
 
     let cssSelector = '.seen_button.js-seen'
     if (await page.$(cssSelector)) {
