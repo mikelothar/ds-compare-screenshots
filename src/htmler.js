@@ -72,8 +72,7 @@ const indexHtml = compare => {
   return `
     ${head('Compare')}
       <h1>Compare</h1>
-      <h3>${title1}</h3>
-      <h3>${title2}</h3>
+      <h3>${title1} > ${title2}</h3>
       <h3>Compare screenshots</h3>
       ${uniqueLinks.replace(/,/g, '')}
       <h3>Pages in screenshots</h3>
