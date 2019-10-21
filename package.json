@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "specific": "node index.js --base-env danskespil.dk --base-date latest shoot-env danskespil.dk --shoot-date now --el header.header",
+    "town21": "node index.js --base-env town21.danskespil.dk --base-date latest --shoot-env town21.danskespil.dk --shoot-date now",
+    "town21Header": "node index.js --base-env town21.danskespil.dk --base-date latest --shoot-env town21.danskespil.dk --shoot-date now --el header.header",
     "serve": "lite-server"
   },
   "keywords": [],
