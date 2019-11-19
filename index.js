@@ -4,6 +4,7 @@ const utils = require('./src/utils')
 const params = utils.params(process.argv)
 
 const compare = {
+  logIn: false,
   el: params.el,
   base: { env: params.baseEnv, date: params.baseDate },
   shoot: { env: params.shootEnv, date: params.shootDate },
