@@ -32,7 +32,7 @@ const diff = compare => {
     const minHeight = Math.min(oldImg.height, newImg.height)
     const minWidth = Math.min(oldImg.width, newImg.width)
 
-    if (oldImg.height !== newImg.height) {
+    if (oldImg.height !== newImg.height || oldImg.width !== newImg.width) {
       const oldImgHighest = oldImg.height > newImg.height
       const config = { width: minWidth, height: minHeight, top: 0, left: 0 }
       const tallestImg = oldImgHighest ? oldFile : newFile
