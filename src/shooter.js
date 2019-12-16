@@ -2,6 +2,7 @@ const fs = require('fs')
 const puppeteer = require('puppeteer')
 const devices = require('puppeteer/DeviceDescriptors')
 const utils = require('./utils')
+const users = require('../_users')
 
 let browser
 let page
@@ -16,9 +17,12 @@ const shoot = compare => {
     let element = await page.waitForSelector('a.js-login-header.mobile-only', { visible: true })
     await element.click()
 
+    const username = env === 'danskespil.dk' ? users.prod.username : users.town21.username
+    const password = env === 'danskespil.dk' ? users.prod.password : users.town21.password
+
     await page.waitForSelector('#josso_username', { visible: true })
-    await page.type('#josso_username', 'XXX', { delay: 25 })
-    await page.type('#josso_password', 'XXX', { delay: 25 })
+    await page.type('#josso_username', username, { delay: 25 })
+    await page.type('#josso_password', password, { delay: 25 })
     await page.click('.dtUsernamePasswordLoginSubmitButton')
 
     await page.waitFor(Number(3000))
@@ -69,7 +73,7 @@ const shoot = compare => {
       })
     else await page.emulate(devices[urlAndDevice.device])
 
-    await page.goto(url)
+    await page.goto(url, { waitUntil: 'networkidle2' })
     await page.waitFor(Number(2000))
 
     try {
