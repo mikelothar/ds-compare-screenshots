@@ -1,6 +1,6 @@
 const fs = require('fs')
 const puppeteer = require('puppeteer')
-const devices = require('puppeteer/DeviceDescriptors')
+// const devices = require('puppeteer/DeviceDescriptors')
 const utils = require('./utils')
 const users = require('../_users')
 
@@ -10,7 +10,7 @@ let page
 const shoot = compare => {
   const logIn = async function(env) {
     console.log('Logging in...')
-    await page.emulate(devices['iPad'])
+    await page.emulate(puppeteer.devices['iPad'])
     const url = `https://${env}/lotto`
     await page.goto(url, { waitUntil: 'networkidle2' })
 
@@ -47,6 +47,19 @@ const shoot = compare => {
 
     page = await browser.newPage()
 
+    // no need to load images
+    await page.setRequestInterception(true);
+    page.on('request', (request) => {
+
+      // don't load images.
+      // if (request.resourceType() === 'image') request.abort(); else
+
+      // skip modal.
+      if (request.url().endsWith('Bootstrap.js')) request.abort();
+
+      else request.continue();
+    });
+
     if (compare.logIn) await logIn(env)
   }
 
@@ -71,7 +84,7 @@ const shoot = compare => {
         width: Number(compare.desktopWidth),
         height: Number(0),
       })
-    else await page.emulate(devices[urlAndDevice.device])
+    else await page.emulate(puppeteer.devices[urlAndDevice.device])
 
     await page.goto(url, { waitUntil: 'networkidle2' })
     await page.waitFor(Number(2000))
@@ -103,7 +116,7 @@ const shoot = compare => {
         path: outputFile,
         fullPage: true,
       })
-      await page.emulateMedia('screen')
+      // await page.emulateMedia('screen')
     }
   }
 

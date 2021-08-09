@@ -25,6 +25,8 @@
     "png-crop": "0.0.2",
     "prettier": "^1.18.2",
     "pretty-ms": "^5.0.0",
+    "puppeteer": "^5.5.0",
+    "puppeteer-core": "^5.5.0",
     "screenshoteer": "^1.0.9"
   }
 }
