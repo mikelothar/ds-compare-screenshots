@@ -7,7 +7,8 @@
     "start": "node index.js",
     "town21": "node index.js --base-env town21.danskespil.dk --base-date latest --shoot-env town21.danskespil.dk --shoot-date now",
     "town21Header": "node index.js --base-env town21.danskespil.dk --base-date latest --shoot-env town21.danskespil.dk --shoot-date now --el header.header",
-    "serve": "lite-server"
+    "serve": "lite-server",
+    "test": "node deletesubscriptions.js"
   },
   "keywords": [],
   "author": "",
