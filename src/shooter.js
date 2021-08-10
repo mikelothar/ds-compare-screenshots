@@ -17,8 +17,11 @@ const shoot = compare => {
     let element = await page.waitForSelector('a.js-login-header.mobile-only', { visible: true })
     await element.click()
 
-    const username = env === 'danskespil.dk' ? users.prod.username : users.town21.username
-    const password = env === 'danskespil.dk' ? users.prod.password : users.town21.password
+    let username = env === 'danskespil.dk' ? users.prod.username : users.town21.username
+    let password = env === 'danskespil.dk' ? users.prod.password : users.town21.password
+    
+    if (env === 'web.develop.danskespil.dk') username = users.develop.username
+    if (env === 'web.develop.danskespil.dk') password = users.develop.password
 
     await page.waitForSelector('#josso_username', { visible: true })
     await page.type('#josso_username', username, { delay: 25 })

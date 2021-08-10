@@ -8,7 +8,13 @@ const town21 = {
   password: ''
 }
 
+const develop = {
+  username: '',
+  password: ''
+}
+
 module.exports = {
   prod,
-  town21
+  town21,
+  develop
 }
