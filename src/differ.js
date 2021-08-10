@@ -6,9 +6,9 @@ const utils = require('./utils')
 
 const diff = compare => {
   const asyncDiff = async function(urlAndDevice, i) {
-    const oldFile = utils.outputShotsFile(compare.base.env, compare.base.date, urlAndDevice.device, urlAndDevice.url)
-    const newFile = utils.outputShotsFile(compare.shoot.env, compare.shoot.date, urlAndDevice.device, urlAndDevice.url)
-    const diffFile = utils.outputDiffFile(compare, urlAndDevice.device, urlAndDevice.url)
+    const oldFile = utils.outputShotsFile(compare.base.env, compare.base.date, urlAndDevice.device, utils.sanitizeUrl(urlAndDevice.url))
+    const newFile = utils.outputShotsFile(compare.shoot.env, compare.shoot.date, urlAndDevice.device, utils.sanitizeUrl(urlAndDevice.url))
+    const diffFile = utils.outputDiffFile(compare, urlAndDevice.device, utils.sanitizeUrl(urlAndDevice.url))
 
     if (!fs.existsSync(oldFile) || !fs.existsSync(newFile) || fs.existsSync(diffFile)) {
       return
