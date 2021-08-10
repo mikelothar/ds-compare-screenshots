@@ -12,7 +12,7 @@ const compare = {
   devices: ['Desktop', 'iPhone 7', 'iPad', 'iPad landscape', 'iPad Pro', 'iPad Pro landscape'],
   urls: [
     '',
-    '/ny_forside',
+    // '/ny_forside',
     '/alt-eller-intet',
     '/alt-eller-intet/vaelg-selv',
     '/alt-eller-intet/saadan-spiller-du',
@@ -28,6 +28,8 @@ const compare = {
     '/oddset/app-guide',
     '/om',
     '/plus-abonnement/plus-vaelg-spil',
+    '/plus-abonnement/plus-vaelg-spil#/dialog-flow',
+    '/plus-abonnement/plus-vaelg-spil#/vikinglotto',
     '/quick',
     '/spillehjoernet',
     '/vikinglotto',
