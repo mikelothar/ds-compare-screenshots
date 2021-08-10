@@ -91,8 +91,15 @@ const outputShotsPath = (env, date, device) => {
   return p
 }
 
+const sanitizeUrl = url => url.replace(/\?/g, '_')
+  .replace(/\#/g, '_')
+  .replace(/\//g, '_')
+  .replace(/\=/g, '_')
+  .replace(/___/g, '_')
+  .replace(/__/g, '_')
+
 const outputShotsFile = (env, date, device, url) => {
-  return `${outputShotsPath(env, date, device)}/${fileName(url)}.png`
+  return `${outputShotsPath(env, date, device)}/${fileName(sanitizeUrl(url))}.png`
 }
 
 const outputDiffPath = (compare, device) => {
@@ -118,4 +125,5 @@ module.exports = {
   outputDiffPath,
   outputDiffFile,
   params,
+  sanitizeUrl,
 }
