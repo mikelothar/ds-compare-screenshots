@@ -31,19 +31,6 @@ const css = `
   padding-right: 10px
 }
 
-table th {
-  overflow: hidden;
-}
-
-table td {
-  vertical-align: top;
-  width: 33.3333%;
-}
-
-table tr {
-  position: relative;
-}
-
 .zoom1 {
   grid-template-columns: 2fr 1fr 1fr;
 }
