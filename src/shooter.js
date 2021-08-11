@@ -20,15 +20,17 @@ const shoot = compare => {
     let username = env === 'danskespil.dk' ? users.prod.username : users.town21.username
     let password = env === 'danskespil.dk' ? users.prod.password : users.town21.password
     
-    if (env === 'web.develop.danskespil.dk') username = users.develop.username
-    if (env === 'web.develop.danskespil.dk') password = users.develop.password
+    if (env === `web.${process.env.LOCAL_TEST_ENV_NAME}.danskespil.dk`) {
+      username = users.develop.username
+      password = users.develop.password
+    }
 
     await page.waitForSelector('#josso_username', { visible: true })
     await page.type('#josso_username', username, { delay: 25 })
     await page.type('#josso_password', password, { delay: 25 })
     await page.click('.dtUsernamePasswordLoginSubmitButton')
 
-    await page.waitFor(Number(3000))
+    await page.waitForTimeout(Number(3000))
   }
 
   const startBrowser = async function(env) {
@@ -90,21 +92,21 @@ const shoot = compare => {
     else await page.emulate(puppeteer.devices[urlAndDevice.device])
 
     await page.goto(url, { waitUntil: 'networkidle2' })
-    await page.waitFor(Number(2000))
+    await page.waitForTimeout(Number(2000))
 
     try {
       await page.click('.seen_button.js-seen')
-      await page.waitFor(Number(200))
+      await page.waitForTimeout(Number(200))
     } catch (err) {}
 
     try {
       await page.click('#ensCloseBanner')
-      await page.waitFor(Number(200))
+      await page.waitForTimeout(Number(200))
     } catch (err) {}
 
     try {
       await page.click('.close-btn.notifications-item-close-button')
-      await page.waitFor(Number(200))
+      await page.waitForTimeout(Number(200))
     } catch (err) {}
 
     if (compare.el) {

@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "develop": "node index.js --base-env web.develop.danskespil.dk --base-date latest --shoot-env web.develop.danskespil.dk --shoot-date now",
+    "devTest": "node -e \"require('dotenv').config();require('child_process').execSync('node index.js --base-env web.' + process.env.LOCAL_TEST_ENV_NAME + '.danskespil.dk --base-date latest --shoot-env web.' + process.env.LOCAL_TEST_ENV_NAME + '.danskespil.dk --shoot-date now')\"",
     "town21": "node index.js --base-env town21.danskespil.dk --base-date latest --shoot-env town21.danskespil.dk --shoot-date now",
     "town21Header": "node index.js --base-env town21.danskespil.dk --base-date latest --shoot-env town21.danskespil.dk --shoot-date now --el header.header",
     "serve": "lite-server",
@@ -17,6 +18,7 @@
   "dependencies": {
     "commander": "^3.0.2",
     "delete": "^1.1.0",
+    "dotenv": "^10.0.0",
     "fs": "0.0.1-security",
     "lite-server": "^2.5.4",
     "merge-img": "^2.1.3",
