@@ -1,6 +1,6 @@
+require('dotenv').config();
 const init = require('./src/init')
 const utils = require('./src/utils')
-
 const params = utils.params(process.argv)
 const pamUrls = [
   '/blaa-konto/mine-oplysninger#/',
@@ -10,6 +10,7 @@ const pamUrls = [
   '/blaa-konto/mine-oplysninger#/cards',
   '/blaa-konto/mine-oplysninger#/account',
 ]
+
 const compare = {
   logIn: true,
   el: params.el,

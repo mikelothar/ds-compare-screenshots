@@ -1,18 +1,16 @@
-const CONFIG = require('./config.json')
-
 const prod = {
-  username: CONFIG.users.prod.username,
-  password: CONFIG.users.prod.password
+  username: process.env.PROD_USERNAME,
+  password: process.env.PROD_PASSWORD
 }
 
 const town21 = {
-  username: CONFIG.users.town21.username,
-  password: CONFIG.users.town21.password
+  username: process.env.TOWN21_USERNAME,
+  password: process.env.TOWN21_PASSWORD
 }
 
 const develop = {
-  username: CONFIG.users.develop.username,
-  password: CONFIG.users.develop.password
+  username: process.env.DEV_USERNAME,
+  password: process.env.DEV_PASSWORD
 }
 
 module.exports = {

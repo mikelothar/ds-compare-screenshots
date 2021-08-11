@@ -3,7 +3,6 @@ const puppeteer = require('puppeteer')
 // const devices = require('puppeteer/DeviceDescriptors')
 const utils = require('./utils')
 const users = require('../_users')
-const CONFIG = require('../config.json')
 
 let browser
 let page
@@ -21,7 +20,7 @@ const shoot = compare => {
     let username = env === 'danskespil.dk' ? users.prod.username : users.town21.username
     let password = env === 'danskespil.dk' ? users.prod.password : users.town21.password
     
-    if (env === `web.${CONFIG.localTestEnv}.danskespil.dk`) {
+    if (env === `web.${process.env.LOCAL_TEST_ENV_NAME}.danskespil.dk`) {
       username = users.develop.username
       password = users.develop.password
     }
