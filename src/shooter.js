@@ -3,6 +3,7 @@ const puppeteer = require('puppeteer')
 // const devices = require('puppeteer/DeviceDescriptors')
 const utils = require('./utils')
 const users = require('../_users')
+const CONFIG = require('../config.json')
 
 let browser
 let page
