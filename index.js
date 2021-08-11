@@ -2,14 +2,28 @@ const init = require('./src/init')
 const utils = require('./src/utils')
 
 const params = utils.params(process.argv)
-
+const pamUrls = [
+  '/blaa-konto/mine-oplysninger#/',
+  '/blaa-konto/mine-oplysninger#/password',
+  '/blaa-konto/mine-oplysninger#/email',
+  '/blaa-konto/mine-oplysninger#/phone',
+  '/blaa-konto/mine-oplysninger#/cards',
+  '/blaa-konto/mine-oplysninger#/account',
+]
 const compare = {
   logIn: true,
   el: params.el,
   base: { env: params.baseEnv, date: params.baseDate },
   shoot: { env: params.shootEnv, date: params.shootDate },
   desktopWidth: 1600,
-  devices: ['Desktop', 'iPhone 7', 'iPad', 'iPad landscape', 'iPad Pro', 'iPad Pro landscape'],
+  devices: [
+    // 'Desktop', 
+    // 'iPhone 7', 
+    // 'iPad', 
+    'iPad landscape', 
+    // 'iPad Pro', 
+    // 'iPad Pro landscape'
+  ],
   urls: [
     // '',
     // '/alt-eller-intet',
@@ -29,8 +43,9 @@ const compare = {
     // '/quick',
     // '/spillehjoernet',
     // '/vikinglotto',
-    '/blaa-konto/mine-oplysninger#/account',
+    ...pamUrls
   ],
+
 }
 
 init.init(compare)

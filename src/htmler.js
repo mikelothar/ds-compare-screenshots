@@ -25,15 +25,15 @@ const baseHtml = (imgArr, compare, urlAndDevice) => {
   return `
     ${head('Compare')}
       <h1>Compare ${urlAndDevice.device}</h1>
-      <table>
-      <tr>
-      <th>${base}</td>
-      <th>${shot}</td>
-      <th>Difference</td>
-      </tr>
+      <div class="container">
+      <div class="base">${base}</div>
+      <div class="shot">${shot}</div>
+      <div class="diff">Difference</div>
       ${trHtml(imgArr, compare, urlAndDevice)}
-      </table>
+      </div>
+      ${scripts()}
     </body>
+      
     </html>`.replace(/,/g, '')
 }
 
@@ -43,12 +43,41 @@ const trHtml = (imgArr, compare, urlAndDevice) => {
     const shotFile = `${utils.outputShotsPath(compare.shoot.env, compare.shoot.date, urlAndDevice.device).replace('/output', '')}/${file}`
     const diffFile = `${utils.outputDiffPath(compare, urlAndDevice.device).replace('/output', '')}/${file}`
 
-    let tds = `<td><img src="${baseFile}" title="${file}"></td>`
-    tds += `<td><img src="${shotFile}" title="${file}"></td>`
-    tds += `<td><img src="${diffFile}" title="${file}"></td>`
-    return `<tr>${tds}</tr>`
+    let tds = `<div class="base" onclick="base()"><img src="${baseFile}" title="${file}"></div>`
+    tds += `<div class="shot" onclick="shot()"><img src="${shotFile}" title="${file}"></div>`
+    tds += `<div class="diff" onclick="diff()"><img src="${diffFile}" title="${file}"></div>`
+    return tds
   })
   return tdEls
+}
+
+const scripts = () => {
+  
+  return `
+  <script>
+ function diff() {
+      const container = document.querySelector('.container');
+      container.classList.toggle('zoom3')
+      container.classList.remove('zoom1') 
+      container.classList.remove('zoom2')
+    }
+    function shot() {
+      const container = document.querySelector('.container');
+      container.classList.toggle('zoom2')
+      container.classList.remove('zoom1') 
+      container.classList.remove('zoom3')
+    }
+    function base() {
+      const container = document.querySelector('.container');
+      container.classList.toggle('zoom1')
+      container.classList.remove('zoom2') 
+      container.classList.remove('zoom3')
+    }
+      
+  </script>
+  `
+  
+  
 }
 
 const indexHtml = compare => {
@@ -84,7 +113,7 @@ const indexHtml = compare => {
 const makeHtmls = compare => {
   console.log(`Making htmls... \n`)
 
-  const asyncMakeHtmls = async function(urlAndDevice) {
+  const asyncMakeHtmls = async function (urlAndDevice) {
     let resultPath = `./output`
 
     if (!fs.existsSync(resultPath)) return
@@ -101,7 +130,7 @@ const makeHtmls = compare => {
     await new Promise((resolve, reject) => {
       const imgPath = utils.outputDiffPath(compare, urlAndDevice.device)
 
-      const promise = fs.readdir(imgPath, function(err, files) {
+      const promise = fs.readdir(imgPath, function (err, files) {
         if (err) {
           return console.log('Unable to scan directory: ' + err)
         }
