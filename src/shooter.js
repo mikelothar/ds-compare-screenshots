@@ -19,7 +19,7 @@ const shoot = compare => {
 
     let username = env === 'danskespil.dk' ? users.prod.username : users.town21.username
     let password = env === 'danskespil.dk' ? users.prod.password : users.town21.password
-    
+
     if (env === `web.${process.env.LOCAL_TEST_ENV_NAME}.danskespil.dk`) {
       username = users.develop.username
       password = users.develop.password
@@ -30,7 +30,7 @@ const shoot = compare => {
     await page.type('#josso_password', password, { delay: 25 })
     await page.click('.dtUsernamePasswordLoginSubmitButton')
 
-    await page.waitForTimeout(Number(3000))
+    await page.waitForTimeout(3000)
   }
 
   const startBrowser = async function(env) {
@@ -53,17 +53,15 @@ const shoot = compare => {
     page = await browser.newPage()
 
     // no need to load images
-    await page.setRequestInterception(true);
-    page.on('request', (request) => {
-
+    await page.setRequestInterception(true)
+    page.on('request', request => {
       // don't load images.
       // if (request.resourceType() === 'image') request.abort(); else
 
       // skip modal.
-      if (request.url().endsWith('Bootstrap.js')) request.abort();
-
-      else request.continue();
-    });
+      if (request.url().endsWith('Bootstrap.js')) request.abort()
+      else request.continue()
+    })
 
     if (compare.logIn) await logIn(env)
   }
@@ -92,21 +90,21 @@ const shoot = compare => {
     else await page.emulate(puppeteer.devices[urlAndDevice.device])
 
     await page.goto(url, { waitUntil: 'networkidle2' })
-    await page.waitForTimeout(Number(2000))
+    await page.waitForTimeout(2000)
 
     try {
       await page.click('.seen_button.js-seen')
-      await page.waitForTimeout(Number(200))
+      await page.waitForTimeout(200)
     } catch (err) {}
 
     try {
       await page.click('#ensCloseBanner')
-      await page.waitForTimeout(Number(200))
+      await page.waitForTimeout(200)
     } catch (err) {}
 
     try {
       await page.click('.close-btn.notifications-item-close-button')
-      await page.waitForTimeout(Number(200))
+      await page.waitForTimeout(200)
     } catch (err) {}
 
     if (compare.el) {

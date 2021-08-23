@@ -11,10 +11,7 @@ const imgs = (imgs, timeNow) => {
 }
 
 const md = (timeNow, imgs, compareWith, device) => {
-  return `# ${device}\n\n### ${compareWith} / ${timeNow} / Difference\n\n${imgs}`.replace(
-    /,/g,
-    ''
-  )
+  return `# ${device}\n\n### ${compareWith} / ${timeNow} / Difference\n\n${imgs}`.replace(/,/g, '')
 }
 
 const indexMd = (timeNow, compareWithDate, urlsAndDevices, output) => {
@@ -38,13 +35,9 @@ const indexMd = (timeNow, compareWithDate, urlsAndDevices, output) => {
 const makeMarkdowns = (urlsAndDevices, output, timeNow, compareWithDate) => {
   console.log(`Making markdowns... \n`)
 
-  fs.writeFile(
-    `./readme-${output}.md`,
-    indexMd(timeNow, compareWithDate, urlsAndDevices, output),
-    err => {
-      if (err) throw err
-    }
-  )
+  fs.writeFile(`./readme-${output}.md`, indexMd(timeNow, compareWithDate, urlsAndDevices, output), err => {
+    if (err) throw err
+  })
 
   const asyncMakeMarkdown = async function(urlAndDevice, i) {
     const mergeFilePath = utils.pathOutput(`${output}/output`, `${timeNow}-${compareWithDate}`, urlAndDevice)
@@ -64,15 +57,8 @@ const makeMarkdowns = (urlsAndDevices, output, timeNow, compareWithDate) => {
 
       mkdirp(`${output}/markdown/${timeNow}-${compareWithDate}`, err => {
         fs.writeFile(
-          `${output}/markdown/${timeNow}-${compareWithDate}/${utils.devicePath(
-            urlAndDevice.device
-          )}.md`,
-          md(
-            timeNow,
-            imgs(imgArr, timeNow),
-            compareWithDate,
-            urlAndDevice.device
-          ),
+          `${output}/markdown/${timeNow}-${compareWithDate}/${utils.devicePath(urlAndDevice.device)}.md`,
+          md(timeNow, imgs(imgArr, timeNow), compareWithDate, urlAndDevice.device),
           err => {
             if (err) throw err
           }

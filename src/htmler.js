@@ -39,8 +39,12 @@ const baseHtml = (imgArr, compare, urlAndDevice) => {
 
 const trHtml = (imgArr, compare, urlAndDevice) => {
   const tdEls = imgArr.map(file => {
-    const baseFile = `${utils.outputShotsPath(compare.base.env, compare.base.date, urlAndDevice.device).replace('/output', '')}/${file}`
-    const shotFile = `${utils.outputShotsPath(compare.shoot.env, compare.shoot.date, urlAndDevice.device).replace('/output', '')}/${file}`
+    const baseFile = `${utils
+      .outputShotsPath(compare.base.env, compare.base.date, urlAndDevice.device)
+      .replace('/output', '')}/${file}`
+    const shotFile = `${utils
+      .outputShotsPath(compare.shoot.env, compare.shoot.date, urlAndDevice.device)
+      .replace('/output', '')}/${file}`
     const diffFile = `${utils.outputDiffPath(compare, urlAndDevice.device).replace('/output', '')}/${file}`
 
     let tds = `<div class="base" onclick="base()"><img src="${baseFile}" title="${file}"></div>`
@@ -52,7 +56,6 @@ const trHtml = (imgArr, compare, urlAndDevice) => {
 }
 
 const scripts = () => {
-  
   return `
   <script>
  function diff() {
@@ -76,8 +79,6 @@ const scripts = () => {
       
   </script>
   `
-  
-  
 }
 
 const indexHtml = compare => {
@@ -113,7 +114,7 @@ const indexHtml = compare => {
 const makeHtmls = compare => {
   console.log(`Making htmls... \n`)
 
-  const asyncMakeHtmls = async function (urlAndDevice) {
+  const asyncMakeHtmls = async function(urlAndDevice) {
     let resultPath = `./output`
 
     if (!fs.existsSync(resultPath)) return
@@ -130,7 +131,7 @@ const makeHtmls = compare => {
     await new Promise((resolve, reject) => {
       const imgPath = utils.outputDiffPath(compare, urlAndDevice.device)
 
-      const promise = fs.readdir(imgPath, function (err, files) {
+      const promise = fs.readdir(imgPath, function(err, files) {
         if (err) {
           return console.log('Unable to scan directory: ' + err)
         }

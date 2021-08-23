@@ -10,8 +10,12 @@
     "town21": "node index.js --base-env town21.danskespil.dk --base-date latest --shoot-env town21.danskespil.dk --shoot-date now",
     "town21Header": "node index.js --base-env town21.danskespil.dk --base-date latest --shoot-env town21.danskespil.dk --shoot-date now --el header.header",
     "serve": "lite-server",
-    "test": "node deletesubscriptions.js"
+    "test": "node deletesubscriptions.js",
+    "prettier": "prettier --write ./src/*.js"
   },
+  "pre-commit": [
+    "prettier"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -27,6 +31,7 @@
     "path": "^0.12.7",
     "pixelmatch": "^5.1.0",
     "png-crop": "0.0.2",
+    "pre-commit": "^1.2.2",
     "prettier": "^1.18.2",
     "pretty-ms": "^5.0.0",
     "puppeteer": "^5.5.0",
