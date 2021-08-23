@@ -11,7 +11,7 @@
     "town21Header": "node index.js --base-env town21.danskespil.dk --base-date latest --shoot-env town21.danskespil.dk --shoot-date now --el header.header",
     "serve": "lite-server",
     "test": "node deletesubscriptions.js",
-    "prettier": "prettier --write ./src/*.js"
+    "prettier": "prettier --write ./src/*.js ./index.js"
   },
   "pre-commit": [
     "prettier"

@@ -42,8 +42,8 @@ const css = `
 .zoom3 {
   grid-template-columns: 1fr 1fr 2fr;
 }
-`
+`;
 
 module.exports = {
   css,
-}
+};

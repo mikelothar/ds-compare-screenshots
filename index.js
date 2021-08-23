@@ -1,52 +1,59 @@
 require('dotenv').config();
-const init = require('./src/init')
-const utils = require('./src/utils')
-const params = utils.params(process.argv)
+const init = require('./src/init');
+const utils = require('./src/utils');
+const params = utils.params(process.argv);
+
 const pamUrls = [
-  '/blaa-konto/mine-oplysninger#/',
-  '/blaa-konto/mine-oplysninger#/password',
-  '/blaa-konto/mine-oplysninger#/email',
-  '/blaa-konto/mine-oplysninger#/phone',
-  '/blaa-konto/mine-oplysninger#/cards',
-  '/blaa-konto/mine-oplysninger#/account',
-]
+  '/roed-konto/mine-oplysninger#/',
+  '/roed-konto/mine-oplysninger#/password',
+  '/roed-konto/mine-oplysninger#/email',
+  '/roed-konto/mine-oplysninger#/phone',
+  '/roed-konto/mine-oplysninger#/cards',
+  '/roed-konto/mine-oplysninger#/account',
+];
+
+const loggedOutUrls = [
+  '',
+  '/alt-eller-intet',
+  '/alt-eller-intet/vaelg-selv',
+  '/alt-eller-intet/saadan-spiller-du',
+  '/bingo',
+  '/eurojackpot',
+  '/keno',
+  '/livecasino',
+  '/livecasino/kampagner/velkomsttilbud',
+  '/lotto',
+  '/oddset/app-guide',
+  '/om',
+  '/plus-abonnement/plus-vaelg-spil',
+  '/plus-abonnement/plus-vaelg-spil#/dialog-flow',
+  '/plus-abonnement/plus-vaelg-spil#/vikinglotto',
+  '/quick',
+  '/spillehjoernet',
+  '/spil-sammen',
+  '/vikinglotto',
+  '/virtuel',
+];
+
+const loggedInUrls = [...pamUrls];
+
+const runLoggedIns = true;
 
 const compare = {
-  logIn: true,
+  logIn: runLoggedIns,
   el: params.el,
   base: { env: params.baseEnv, date: params.baseDate },
   shoot: { env: params.shootEnv, date: params.shootDate },
   desktopWidth: 1600,
   devices: [
-    'Desktop', 
-    'iPhone 7', 
-    'iPad', 
-    'iPad landscape', 
-    'iPad Pro', 
+    'Desktop',
+    'iPhone 7',
+    'iPad',
+    'iPad landscape',
+    'iPad Pro',
     'iPad Pro landscape'
   ],
-  urls: [
-    '',
-    '/alt-eller-intet',
-    '/alt-eller-intet/vaelg-selv',
-    '/alt-eller-intet/saadan-spiller-du',
-    '/bingo',
-    '/eurojackpot',
-    '/keno',
-    '/livecasino',
-    '/livecasino/kampagner/velkomsttilbud',
-    '/lotto',
-    '/oddset/app-guide',
-    '/om',
-    '/plus-abonnement/plus-vaelg-spil',
-    '/plus-abonnement/plus-vaelg-spil#/dialog-flow',
-    '/plus-abonnement/plus-vaelg-spil#/vikinglotto',
-    '/quick',
-    '/spillehjoernet',
-    '/vikinglotto',
-    // ...pamUrls
-  ],
+  urls: runLoggedIns ? [...loggedInUrls] : [...loggedOutUrls],
+};
 
-}
-
-init.init(compare)
+init.init(compare);
