@@ -8,7 +8,7 @@ let browser;
 let page;
 
 const shoot = compare => {
-  const logIn = async function (env) {
+  const logIn = async function(env) {
     console.log('Logging in...');
     await page.emulate(puppeteer.devices['iPad']);
     const url = `https://${env}/lotto`;
@@ -33,22 +33,22 @@ const shoot = compare => {
     await page.waitForTimeout(3000);
   };
 
-  const startBrowser = async function (env) {
+  const startBrowser = async function(env) {
     console.log('Starting browser...');
 
     // https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#puppeteerlaunchoptions
     browser =
       process.platform === 'win32'
         ? await puppeteer.launch({
-          executablePath: 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
-          ignoreHTTPSErrors: true,
-          headless: true,
-        })
+            executablePath: 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
+            ignoreHTTPSErrors: true,
+            headless: true,
+          })
         : await puppeteer.launch({
-          executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-          ignoreHTTPSErrors: true,
-          headless: false,
-        });
+            executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+            ignoreHTTPSErrors: true,
+            headless: false,
+          });
 
     page = await browser.newPage();
 
@@ -66,12 +66,12 @@ const shoot = compare => {
     if (compare.logIn) await logIn(env);
   };
 
-  const endBrowser = async function () {
+  const endBrowser = async function() {
     console.log('Ending browser...');
     await browser.close();
   };
 
-  const asyncShoot = async function (urlAndDevice, i, env) {
+  const asyncShoot = async function(urlAndDevice, i, env) {
     const outputFile = utils.outputShotsFile(env.env, env.date, urlAndDevice.device, urlAndDevice.url);
 
     if (fs.existsSync(outputFile)) {
@@ -95,20 +95,17 @@ const shoot = compare => {
     try {
       await page.click('.seen_button.js-seen');
       await page.waitForTimeout(200);
-    } catch (err) {
-    }
+    } catch (err) {}
 
     try {
       await page.click('#ensCloseBanner');
       await page.waitForTimeout(200);
-    } catch (err) {
-    }
+    } catch (err) {}
 
     try {
       await page.click('.close-btn.notifications-item-close-button');
       await page.waitForTimeout(200);
-    } catch (err) {
-    }
+    } catch (err) {}
 
     if (compare.el) {
       const e = await page.$(compare.el);

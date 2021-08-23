@@ -45,14 +45,7 @@ const compare = {
   base: { env: params.baseEnv, date: params.baseDate },
   shoot: { env: params.shootEnv, date: params.shootDate },
   desktopWidth: 1600,
-  devices: [
-    'Desktop',
-    'iPhone 7',
-    'iPad',
-    'iPad landscape',
-    'iPad Pro',
-    'iPad Pro landscape'
-  ],
+  devices: ['Desktop', 'iPhone 7', 'iPad', 'iPad landscape', 'iPad Pro', 'iPad Pro landscape'],
   urls: runLoggedIns ? [...loggedInUrls] : [...loggedOutUrls],
 };
 
