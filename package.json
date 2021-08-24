@@ -22,22 +22,22 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "commander": "^3.0.2",
+    "commander": "^8.1.0",
     "delete": "^1.1.0",
     "dotenv": "^10.0.0",
     "fs": "0.0.1-security",
-    "lite-server": "^2.5.4",
+    "lite-server": "^2.6.1",
     "merge-img": "^2.1.3",
-    "mkdirp": "^0.5.1",
-    "node-cmd": "^3.0.0",
+    "mkdirp": "^1.0.4",
+    "node-cmd": "^5.0.0",
     "path": "^0.12.7",
-    "pixelmatch": "^5.1.0",
+    "pixelmatch": "^5.2.1",
     "png-crop": "0.0.2",
     "pre-commit": "^1.2.2",
-    "prettier": "^1.18.2",
-    "pretty-ms": "^5.0.0",
-    "puppeteer": "^5.5.0",
-    "puppeteer-core": "^5.5.0",
-    "screenshoteer": "^1.0.9"
+    "prettier": "^2.3.2",
+    "pretty-ms": "^7.0.1",
+    "puppeteer": "^10.2.0",
+    "puppeteer-core": "^10.2.0",
+    "screenshoteer": "^1.1.1"
   }
 }

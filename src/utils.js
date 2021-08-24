@@ -88,9 +88,9 @@ const urlsAndDevices = compare => {
 };
 
 const outputShotsPath = (env, date, device) => {
-  const p = `./output/shots/${env}/${date}/${devicePath(device)}`;
-  mkdirp(`${p}`, function(err) {});
-  return p;
+  const path = `./output/shots/${env}/${date}/${devicePath(device)}`;
+  mkdirp.sync(path);
+  return path;
 };
 
 const sanitizeUrl = url =>
@@ -107,11 +107,11 @@ const outputShotsFile = (env, date, device, url) => {
 };
 
 const outputDiffPath = (compare, device) => {
-  const p = `./output/diffs/${compare.base.env}-${compare.shoot.env}/${compare.base.date}-${
+  const path = `./output/diffs/${compare.base.env}-${compare.shoot.env}/${compare.base.date}-${
     compare.shoot.date
   }/${devicePath(device)}`;
-  mkdirp(`${p}`, function(err) {});
-  return p;
+  mkdirp.sync(path);
+  return path;
 };
 
 const outputDiffFile = (compare, device, url) => {
