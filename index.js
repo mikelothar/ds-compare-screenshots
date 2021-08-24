@@ -37,16 +37,14 @@ const loggedOutUrls = [
 
 const loggedInUrls = [...pamUrls];
 
-const runLoggedIns = true;
-
 const compare = {
-  logIn: runLoggedIns,
+  logIn: params.loggedIn,
   el: params.el,
   base: { env: params.baseEnv, date: params.baseDate },
   shoot: { env: params.shootEnv, date: params.shootDate },
   desktopWidth: 1600,
   devices: ['Desktop', 'iPhone 7', 'iPad', 'iPad landscape', 'iPad Pro', 'iPad Pro landscape'],
-  urls: runLoggedIns ? [...loggedInUrls] : [...loggedOutUrls],
+  urls: params.loggedIn ? [...loggedInUrls] : [...loggedOutUrls],
 };
 
 init.init(compare);

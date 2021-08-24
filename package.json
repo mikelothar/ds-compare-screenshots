@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "npm run prod:logged-in && npm run prod:logged-out",
+    "prod": "node index.js",
+    "prod:logged-in": "node index.js --loggedin",
     "develop": "node index.js --base-env web.develop.danskespil.dk --base-date latest --shoot-env web.develop.danskespil.dk --shoot-date now",
     "devTest": "node -e \"require('dotenv').config();require('child_process').execSync('node index.js --base-env web.' + process.env.LOCAL_TEST_ENV_NAME + '.danskespil.dk --base-date latest --shoot-env web.' + process.env.LOCAL_TEST_ENV_NAME + '.danskespil.dk --shoot-date now')\"",
     "town21": "node index.js --base-env town21.danskespil.dk --base-date latest --shoot-env town21.danskespil.dk --shoot-date now",

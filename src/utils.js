@@ -16,8 +16,10 @@ const params = args => {
     .option('--shoot-env, [shootEnv]')
     .option('--shoot-date, [shootDate]')
     .option('--el, [el]')
+    .option('--loggedin, [loggedIn]')
     .parse(args);
 
+  output.loggedIn = program.loggedin || false;
   output.baseEnv = program.baseEnv || 'danskespil.dk';
   output.baseDate = program.baseDate || 'latest';
   output.shootEnv = program.shootEnv || 'danskespil.dk';
