@@ -2,8 +2,8 @@ const fs = require('fs');
 const mergeImg = require('merge-img');
 const utils = require('./utils');
 
-const merge = compare => {
-  const asyncMerge = async function(urlAndDevice, i) {
+const merge = (compare) => {
+  const asyncMerge = async function (urlAndDevice, i) {
     const oldFile = utils.fileOutput(`./shots/${compare.base.env}`, compare.base.date, urlAndDevice);
     const newFile = utils.fileOutput(`./shots/${compare.shoot.env}`, compare.shoot.date, urlAndDevice);
     const diffFile = utils.fileOutput(
@@ -26,7 +26,7 @@ const merge = compare => {
     );
 
     try {
-      await mergeImg([oldFile, newFile, diffFile]).then(img => {
+      await mergeImg([oldFile, newFile, diffFile]).then((img) => {
         img.write(mergeFile);
       });
     } catch (err) {

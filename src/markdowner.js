@@ -3,7 +3,7 @@ const mkdirp = require('mkdirp');
 const utils = require('./utils');
 
 const imgs = (imgs, timeNow) => {
-  return imgs.map(img => {
+  return imgs.map((img) => {
     if (img.fileName === 'index.html') return;
     const path = img.resultDir.replace('./', '');
     return `[![${timeNow}](https://raw.githubusercontent.com/mikelothar/ds-compare-screenshots/master/${path}/${img.fileName})](https://raw.githubusercontent.com/mikelothar/ds-compare-screenshots/master/${path}/${img.fileName})\n\n`;
@@ -15,9 +15,9 @@ const md = (timeNow, imgs, compareWith, device) => {
 };
 
 const indexMd = (timeNow, compareWithDate, urlsAndDevices, output) => {
-  const pages = urlsAndDevices.map(urlAndDevice => `* ${urlAndDevice.url}\n`);
+  const pages = urlsAndDevices.map((urlAndDevice) => `* ${urlAndDevice.url}\n`);
 
-  const links = urlsAndDevices.map(urlAndDevice => {
+  const links = urlsAndDevices.map((urlAndDevice) => {
     return `* [${urlAndDevice.device}](./${output}/markdown/${timeNow}-${compareWithDate}/${utils.devicePath(
       urlAndDevice.device
     )}.md)\n`;
@@ -35,31 +35,31 @@ const indexMd = (timeNow, compareWithDate, urlsAndDevices, output) => {
 const makeMarkdowns = (urlsAndDevices, output, timeNow, compareWithDate) => {
   console.log(`Making markdowns... \n`);
 
-  fs.writeFile(`./readme-${output}.md`, indexMd(timeNow, compareWithDate, urlsAndDevices, output), err => {
+  fs.writeFile(`./readme-${output}.md`, indexMd(timeNow, compareWithDate, urlsAndDevices, output), (err) => {
     if (err) throw err;
   });
 
-  const asyncMakeMarkdown = async function(urlAndDevice, i) {
+  const asyncMakeMarkdown = async function (urlAndDevice, i) {
     const mergeFilePath = utils.pathOutput(`${output}/output`, `${timeNow}-${compareWithDate}`, urlAndDevice);
 
     let imgArr = [];
 
-    await fs.readdir(mergeFilePath, function(err, files) {
+    await fs.readdir(mergeFilePath, function (err, files) {
       if (err) {
         return console.log('Unable to scan directory: ' + err);
       }
-      files.forEach(file =>
+      files.forEach((file) =>
         imgArr.push({
           fileName: file,
           resultDir: mergeFilePath,
         })
       );
 
-      mkdirp(`${output}/markdown/${timeNow}-${compareWithDate}`, err => {
+      mkdirp(`${output}/markdown/${timeNow}-${compareWithDate}`, (err) => {
         fs.writeFile(
           `${output}/markdown/${timeNow}-${compareWithDate}/${utils.devicePath(urlAndDevice.device)}.md`,
           md(timeNow, imgs(imgArr, timeNow), compareWithDate, urlAndDevice.device),
-          err => {
+          (err) => {
             if (err) throw err;
           }
         );

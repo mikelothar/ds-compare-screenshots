@@ -2,7 +2,7 @@ const fs = require('fs');
 const utils = require('./utils');
 const style = require('./style');
 
-const head = title => {
+const head = (title) => {
   return `
   <!DOCTYPE html>
     <html>
@@ -38,7 +38,7 @@ const baseHtml = (imgArr, compare, urlAndDevice) => {
 };
 
 const trHtml = (imgArr, compare, urlAndDevice) => {
-  const tdEls = imgArr.map(file => {
+  const tdEls = imgArr.map((file) => {
     const baseFile = `${utils
       .outputShotsPath(compare.base.env, compare.base.date, urlAndDevice.device)
       .replace('/output', '')}/${file}`;
@@ -81,16 +81,16 @@ const scripts = () => {
   `;
 };
 
-const indexHtml = compare => {
+const indexHtml = (compare) => {
   const title1 = `${compare.base.date} (${compare.base.env})`;
   const title2 = `${compare.shoot.date} (${compare.shoot.env})`;
 
-  const pages = utils.urlsAndDevices(compare).map(urlAndDevice => {
+  const pages = utils.urlsAndDevices(compare).map((urlAndDevice) => {
     const url = urlAndDevice.url;
     return `<li><a href="https://${compare.base.env}${url}" target="_top">https://${compare.base.env}${url}</a></li>`;
   });
 
-  const links = utils.urlsAndDevices(compare).map(urlAndDevice => {
+  const links = utils.urlsAndDevices(compare).map((urlAndDevice) => {
     const href = `./${utils.devicePath(urlAndDevice.device)}.html`;
 
     return `<li><a href="${href}" target="_top">${urlAndDevice.device}</a></li>`;
@@ -111,10 +111,10 @@ const indexHtml = compare => {
     </html>`;
 };
 
-const makeHtmls = compare => {
+const makeHtmls = (compare) => {
   console.log(`Making htmls... \n`);
 
-  const asyncMakeHtmls = async function(urlAndDevice) {
+  const asyncMakeHtmls = async function (urlAndDevice) {
     let resultPath = `./output`;
 
     if (!fs.existsSync(resultPath)) return;
@@ -122,7 +122,7 @@ const makeHtmls = compare => {
     let imgArr = [];
 
     await new Promise((resolve, reject) => {
-      const promise = fs.writeFile(`${resultPath}/index.html`, indexHtml(compare), err => {
+      const promise = fs.writeFile(`${resultPath}/index.html`, indexHtml(compare), (err) => {
         // if (err) throw err
         resolve(promise);
       });
@@ -131,20 +131,16 @@ const makeHtmls = compare => {
     await new Promise((resolve, reject) => {
       const imgPath = utils.outputDiffPath(compare, urlAndDevice.device);
 
-      const promise = fs.readdir(imgPath, function(err, files) {
+      const promise = fs.readdir(imgPath, function (err, files) {
         if (err) {
           return console.log('Unable to scan directory: ' + err);
         }
-        files.forEach(file => imgArr.push(file));
+        files.forEach((file) => imgArr.push(file));
 
-        fs.writeFile(
-          `./output/${utils.devicePath(urlAndDevice.device)}.html`,
-          baseHtml(imgArr, compare, urlAndDevice),
-          err => {
-            // if (err) throw err
-            resolve(promise);
-          }
-        );
+        fs.writeFile(`./output/${utils.devicePath(urlAndDevice.device)}.html`, baseHtml(imgArr, compare, urlAndDevice), (err) => {
+          // if (err) throw err
+          resolve(promise);
+        });
       });
     });
   };

@@ -8,7 +8,7 @@ const htmler = require('./htmler');
 
 const startedRunningAt = new Date();
 
-const init = compare => {
+const init = (compare) => {
   (async () => {
     // del.sync(`./${output}/markdown`)
     // del.sync(`./${output}/temp`)

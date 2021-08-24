@@ -7,8 +7,8 @@ const users = require('../_users');
 let browser;
 let page;
 
-const shoot = compare => {
-  const logIn = async function(env) {
+const shoot = (compare) => {
+  const logIn = async function (env) {
     console.log('Logging in...');
     await page.emulate(puppeteer.devices['iPad']);
     const url = `https://${env}/lotto`;
@@ -33,7 +33,7 @@ const shoot = compare => {
     await page.waitForTimeout(3000);
   };
 
-  const startBrowser = async function(env) {
+  const startBrowser = async function (env) {
     console.log('Starting browser...');
 
     // https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#puppeteerlaunchoptions
@@ -54,7 +54,7 @@ const shoot = compare => {
 
     // no need to load images
     await page.setRequestInterception(true);
-    page.on('request', request => {
+    page.on('request', (request) => {
       // don't load images.
       // if (request.resourceType() === 'image') request.abort(); else
 
@@ -66,12 +66,12 @@ const shoot = compare => {
     if (compare.logIn) await logIn(env);
   };
 
-  const endBrowser = async function() {
+  const endBrowser = async function () {
     console.log('Ending browser...');
     await browser.close();
   };
 
-  const asyncShoot = async function(urlAndDevice, i, env) {
+  const asyncShoot = async function (urlAndDevice, i, env) {
     const outputFile = utils.outputShotsFile(env.env, env.date, urlAndDevice.device, urlAndDevice.url);
 
     if (fs.existsSync(outputFile)) {

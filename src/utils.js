@@ -3,12 +3,9 @@ const mkdirp = require('mkdirp');
 const { readdirSync, statSync, existsSync } = require('fs');
 const { join } = require('path');
 
-const params = args => {
+const params = (args) => {
   const output = {};
-  const timeNow = new Date()
-    .toISOString()
-    .split('T')[0]
-    .replace(/-/g, '');
+  const timeNow = new Date().toISOString().split('T')[0].replace(/-/g, '');
 
   program
     .option('--base-env, [baseEnv]')
@@ -29,7 +26,7 @@ const params = args => {
   if (output.shootDate === 'now') output.shootDate = timeNow;
   if (output.el === 'body') output.el = null;
 
-  const dirs = p => readdirSync(p).filter(f => statSync(join(p, f)).isDirectory());
+  const dirs = (p) => readdirSync(p).filter((f) => statSync(join(p, f)).isDirectory());
 
   const dateDirPath = `./output/shots/${output.baseEnv}`;
 
@@ -60,30 +57,30 @@ const params = args => {
   return output;
 };
 
-const devicePath = device => {
+const devicePath = (device) => {
   return device.replace(/ /g, '-').toLowerCase();
 };
 
-const fileName = url => {
+const fileName = (url) => {
   let u = url.replace(/\//g, '_').replace(/^_/, '');
   return u.length > 1 ? u : 'index';
 };
 
 const fileOutput = (path, timeStamp, urlAndDevice) => {
   const outputPath = `${path}/${timeStamp}/${devicePath(urlAndDevice.device)}`;
-  mkdirp(`${outputPath}`, function(err) {});
+  mkdirp(`${outputPath}`, function (err) {});
   return `${outputPath}/${fileName(urlAndDevice.url)}.png`;
 };
 
 const pathOutput = (path, timeStamp, urlAndDevice) => {
   const outputPath = `${path}/${timeStamp}/${devicePath(urlAndDevice.device)}`;
-  mkdirp(`${outputPath}`, function(err) {});
+  mkdirp(`${outputPath}`, function (err) {});
   return outputPath;
 };
 
-const urlsAndDevices = compare => {
+const urlsAndDevices = (compare) => {
   let arr = [];
-  compare.devices.forEach(device => compare.urls.forEach(url => arr.push({ device, url })));
+  compare.devices.forEach((device) => compare.urls.forEach((url) => arr.push({ device, url })));
   return arr;
 };
 
@@ -93,23 +90,17 @@ const outputShotsPath = (env, date, device) => {
   return path;
 };
 
-const sanitizeUrl = url =>
-  url
-    .replace(/\?/g, '_')
-    .replace(/\#/g, '_')
-    .replace(/\//g, '_')
-    .replace(/\=/g, '_')
-    .replace(/___/g, '_')
-    .replace(/__/g, '_');
+const sanitizeUrl = (url) =>
+  url.replace(/\?/g, '_').replace(/\#/g, '_').replace(/\//g, '_').replace(/\=/g, '_').replace(/___/g, '_').replace(/__/g, '_');
 
 const outputShotsFile = (env, date, device, url) => {
   return `${outputShotsPath(env, date, device)}/${fileName(sanitizeUrl(url))}.png`;
 };
 
 const outputDiffPath = (compare, device) => {
-  const path = `./output/diffs/${compare.base.env}-${compare.shoot.env}/${compare.base.date}-${
-    compare.shoot.date
-  }/${devicePath(device)}`;
+  const path = `./output/diffs/${compare.base.env}-${compare.shoot.env}/${compare.base.date}-${compare.shoot.date}/${devicePath(
+    device
+  )}`;
   mkdirp.sync(path);
   return path;
 };

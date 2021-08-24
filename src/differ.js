@@ -4,8 +4,8 @@ const pixelmatch = require('pixelmatch');
 const PNGCrop = require('png-crop');
 const utils = require('./utils');
 
-const diff = compare => {
-  const asyncDiff = async function(urlAndDevice, i) {
+const diff = (compare) => {
+  const asyncDiff = async function (urlAndDevice, i) {
     const oldFile = utils.outputShotsFile(
       compare.base.env,
       compare.base.date,
@@ -49,7 +49,7 @@ const diff = compare => {
 
       // crop the tallest image
       await new Promise((resolve, reject) => {
-        const croppedImg = PNGCrop.crop(tallestImg, tallestImg, config, function(err) {
+        const croppedImg = PNGCrop.crop(tallestImg, tallestImg, config, function (err) {
           if (err) throw err;
           resolve(croppedImg);
         });
