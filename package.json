@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run prod:logged-in && npm run prod:logged-out",
+    "start": "npm run prod:logged-in && npm run prod",
     "prod": "node index.js",
     "prod:logged-in": "node index.js --loggedin",
     "develop": "node index.js --base-env web.develop.danskespil.dk --base-date latest --shoot-env web.develop.danskespil.dk --shoot-date now",
