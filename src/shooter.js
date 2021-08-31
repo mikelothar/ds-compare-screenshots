@@ -50,7 +50,8 @@ const shoot = (compare) => {
             headless: false,
           });
 
-    page = await browser.newPage();
+    const context = await browser.createIncognitoBrowserContext();
+    page = await context.newPage();
 
     // no need to load images
     await page.setRequestInterception(true);
@@ -90,15 +91,10 @@ const shoot = (compare) => {
     else await page.emulate(puppeteer.devices[urlAndDevice.device]);
 
     await page.goto(url, { waitUntil: 'networkidle2' });
-    await page.waitForTimeout(2000);
+    // await page.waitForTimeout(2000);
 
     try {
       await page.click('.seen_button.js-seen');
-      await page.waitForTimeout(200);
-    } catch (err) {}
-
-    try {
-      await page.click('#ensCloseBanner');
       await page.waitForTimeout(200);
     } catch (err) {}
 
