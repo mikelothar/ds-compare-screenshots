@@ -16,12 +16,12 @@ const params = (args) => {
     .option('--loggedin, [loggedIn]')
     .parse(args);
 
-  output.loggedIn = program.loggedin || false;
-  output.baseEnv = program.baseEnv || 'danskespil.dk';
-  output.baseDate = program.baseDate || 'latest';
-  output.shootEnv = program.shootEnv || 'danskespil.dk';
-  output.shootDate = program.shootDate || timeNow;
-  output.el = program.el || 'body';
+  output.loggedIn = program.opts().loggedin || false;
+  output.baseEnv = program.opts().baseEnv || 'danskespil.dk';
+  output.baseDate = program.opts().baseDate || 'latest';
+  output.shootEnv = program.opts().shootEnv || 'danskespil.dk';
+  output.shootDate = program.opts().shootDate || timeNow;
+  output.el = program.opts().el || 'body';
 
   if (output.shootDate === 'now') output.shootDate = timeNow;
   if (output.el === 'body') output.el = null;
