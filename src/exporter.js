@@ -10,8 +10,8 @@ const getEnv = (env) => {
 
 const exporter = (compare) => {
   const asyncMakeHtmls = async function (compare) {
-    rimraf.sync(`./export`);
     const outputPath = `./export/${getEnv(compare.base.env)}`;
+    rimraf.sync(outputPath);
     mkdirp.sync(outputPath);
 
     let copyFrom = `./output/diffs/${compare.base.env}-${compare.shoot.env}/${compare.base.date}-${compare.shoot.date}`;
