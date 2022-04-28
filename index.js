@@ -23,7 +23,6 @@ const loggedOutUrls = [
   '/livecasino',
   '/livecasino/kampagner/velkomsttilbud',
   '/lotto',
-  '/oddset/app-guide',
   '/om',
   '/plus-abonnement/plus-vaelg-spil',
   '/plus-abonnement/plus-vaelg-spil#/dialog-flow',
@@ -33,6 +32,10 @@ const loggedOutUrls = [
   '/spil-sammen',
   '/vikinglotto',
   '/virtuel',
+  '/regler_og_vilkaar/vilkaar/ansvarlighed',
+  '/regler_og_vilkaar/vilkaar/regler_index',
+  '/regler_og_vilkaar/vilkaar/vilkaar-dli',
+  '/regler_og_vilkaar/vilkaar/vilkaar-dlo',
 ];
 
 const loggedInUrls = [...pamUrls];
@@ -43,7 +46,8 @@ const compare = {
   base: { env: params.baseEnv, date: params.baseDate },
   shoot: { env: params.shootEnv, date: params.shootDate },
   desktopWidth: 1600,
-  devices: ['Desktop', 'iPhone 7', 'iPad', 'iPad landscape', 'iPad Pro', 'iPad Pro landscape'],
+  // devices: ['Desktop', 'iPhone 7', 'iPad', 'iPad landscape', 'iPad Pro', 'iPad Pro landscape'],
+  devices: ['Desktop', 'iPhone 7', 'iPad', 'iPad landscape'],
   urls: params.loggedIn ? [...loggedInUrls] : [...loggedOutUrls],
 };
 
