@@ -19,16 +19,19 @@ const head = (title) => {
   `;
 };
 
+const baseHtmlHeader = (compare, file, i) => {
+  let output = '';
+  output += `<div class="base">${compare.base.date} (${file.replace('.png', '')})</div>`;
+  output += `<div class="shot">${compare.shoot.date} (${file.replace('.png', '')})</div>`;
+  output += `<div class="diff">Difference (${file.replace('.png', '')})</div>`;
+  return output;
+};
+
 const baseHtml = (imgArr, compare, urlAndDevice) => {
-  const base = `${compare.base.date} (${compare.base.env})`;
-  const shot = `${compare.shoot.date} (${compare.shoot.env})`;
   return `
     ${head('Compare')}
-      <h1>Compare ${urlAndDevice.device}</h1>
+      <h1>Compare ${urlAndDevice.device} (${compare.shoot.env})</h1>
       <div class="container">
-      <div class="base">${base}</div>
-      <div class="shot">${shot}</div>
-      <div class="diff">Difference</div>
       ${trHtml(imgArr, compare, urlAndDevice)}
       </div>
       ${scripts()}
@@ -47,7 +50,9 @@ const trHtml = (imgArr, compare, urlAndDevice) => {
       .replace('/output', '')}/${file}`;
     const diffFile = `${utils.outputDiffPath(compare, urlAndDevice.device).replace('/output', '')}/${file}`;
 
-    let tds = `<div class="base" onclick="base()"><img src="${baseFile}" title="${file}"></div>`;
+    let tds = '';
+    tds += baseHtmlHeader(compare, file, i);
+    tds += `<div class="base" onclick="base()"><img src="${baseFile}" title="${file}"></div>`;
     tds += `<div class="shot" onclick="shot()"><img src="${shotFile}" title="${file}"></div>`;
     tds += `<div class="diff" onclick="diff()"><img src="${diffFile}" title="${file}"></div>`;
     return tds;
