@@ -19,7 +19,7 @@ const head = (title) => {
   `;
 };
 
-const baseHtmlHeader = (compare, file, i) => {
+const baseHtmlHeader = (compare, file) => {
   let output = '';
   output += `<div class="base">${compare.base.date} (${file.replace('.png', '')})</div>`;
   output += `<div class="shot">${compare.shoot.date} (${file.replace('.png', '')})</div>`;
@@ -51,7 +51,7 @@ const trHtml = (imgArr, compare, urlAndDevice) => {
     const diffFile = `${utils.outputDiffPath(compare, urlAndDevice.device).replace('/output', '')}/${file}`;
 
     let tds = '';
-    tds += baseHtmlHeader(compare, file, i);
+    tds += baseHtmlHeader(compare, file);
     tds += `<div class="base" onclick="base()"><img src="${baseFile}" title="${file}"></div>`;
     tds += `<div class="shot" onclick="shot()"><img src="${shotFile}" title="${file}"></div>`;
     tds += `<div class="diff" onclick="diff()"><img src="${diffFile}" title="${file}"></div>`;

@@ -1,4 +1,5 @@
 .idea/
+export/
 node_modules/
 output/
 .env

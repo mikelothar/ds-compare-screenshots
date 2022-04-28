@@ -5,6 +5,7 @@ const differ = require('./differ');
 const merger = require('./merger');
 const markdowner = require('./markdowner');
 const htmler = require('./htmler');
+const exporter = require('./exporter');
 
 const startedRunningAt = new Date();
 
@@ -19,6 +20,7 @@ const init = (compare) => {
     await differ.diff(compare);
     // await merger.merge(compare)
     await htmler.makeHtmls(compare);
+    await exporter.exporter(compare);
     // await markdowner.makeMarkdowns(urlsAndDevices(urls, devices), output, timeNow, compareWithDate)
 
     console.log(
