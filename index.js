@@ -33,7 +33,7 @@ const loggedOutUrls = [
   '/vikinglotto',
   '/virtuel',
   '/regler_og_vilkaar/vilkaar/ansvarlighed',
-  '/regler_og_vilkaar/vilkaar/regler_index',
+  '/regler_og_vilkaar/regler/regler_index',
   '/regler_og_vilkaar/vilkaar/vilkaar-dli',
   '/regler_og_vilkaar/vilkaar/vilkaar-dlo',
 ];
