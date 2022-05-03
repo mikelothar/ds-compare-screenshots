@@ -41,15 +41,15 @@ const shoot = (compare) => {
     browser =
       process.platform === 'win32'
         ? await puppeteer.launch({
-          executablePath: 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
-          ignoreHTTPSErrors: true,
-          headless: true,
-        })
+            executablePath: 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
+            ignoreHTTPSErrors: true,
+            headless: true,
+          })
         : await puppeteer.launch({
-          executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-          ignoreHTTPSErrors: true,
-          headless: false,
-        });
+            executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+            ignoreHTTPSErrors: true,
+            headless: false,
+          });
 
     const context = await browser.createIncognitoBrowserContext();
     page = await context.newPage();
@@ -100,14 +100,12 @@ const shoot = (compare) => {
     try {
       await page.click('.seen_button.js-seen');
       await page.waitForTimeout(200);
-    } catch (err) {
-    }
+    } catch (err) {}
 
     try {
       await page.click('.close-btn.notifications-item-close-button');
       await page.waitForTimeout(200);
-    } catch (err) {
-    }
+    } catch (err) {}
 
     if (compare.el) {
       const e = await page.$(compare.el);
