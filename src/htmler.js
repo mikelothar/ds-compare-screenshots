@@ -31,9 +31,9 @@ const getContainerMaxWidth = (device) => {
   let maxWidth = '100%';
   device = device.toLowerCase();
   if (device === 'desktop') maxWidth = '100%';
-  if (device === 'iphone 7') maxWidth = (3 * 375 + 3 * 10) + 'px';
-  if (device === 'ipad') maxWidth = (3 * 768 + 3 * 10) + 'px';
-  if (device === 'ipad landscape') maxWidth = (3 * 1024 + 3 * 10) + 'px';
+  if (device === 'iphone 7') maxWidth = 3 * 375 + 3 * 10 + 'px';
+  if (device === 'ipad') maxWidth = 3 * 768 + 3 * 10 + 'px';
+  if (device === 'ipad landscape') maxWidth = 3 * 1024 + 3 * 10 + 'px';
   return `max-width: ${maxWidth}`;
 };
 
