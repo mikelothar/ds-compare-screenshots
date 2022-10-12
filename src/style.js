@@ -23,8 +23,12 @@ const css = `
 }
 
 .container > div {
-  border-bottom:1px solid black;
   padding-bottom: 15px;
+}
+
+.container .label {
+  border-bottom:1px solid black;
+  margin: 5px;
 }
 
 .container > div {
@@ -33,6 +37,7 @@ const css = `
 
 .container > div > img {
   cursor: pointer;
+  margin-bottom: 50px;
 }
 
 .zoom1 {

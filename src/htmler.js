@@ -21,22 +21,31 @@ const head = (title) => {
 
 const baseHtmlHeader = (compare, file) => {
   let output = '';
-  output += `<div class="base">${compare.base.date} (${file.replace('.png', '')})</div>`;
-  output += `<div class="shot">${compare.shoot.date} (${file.replace('.png', '')})</div>`;
-  output += `<div class="diff">Difference (${file.replace('.png', '')})</div>`;
+  output += `<div class="base label">${compare.base.date} (${file.replace('.png', '')})</div>`;
+  output += `<div class="shot label">${compare.shoot.date} (${file.replace('.png', '')})</div>`;
+  output += `<div class="diff label">Difference (${file.replace('.png', '')})</div>`;
   return output;
+};
+
+const getContainerMaxWidth = (device) => {
+  let maxWidth = '100%';
+  device = device.toLowerCase();
+  if (device === 'desktop') maxWidth = '100%';
+  if (device === 'iphone 7') maxWidth = (3 * 375 + 3 * 10) + 'px';
+  if (device === 'ipad') maxWidth = (3 * 768 + 3 * 10) + 'px';
+  if (device === 'ipad landscape') maxWidth = (3 * 1024 + 3 * 10) + 'px';
+  return `max-width: ${maxWidth}`;
 };
 
 const baseHtml = (imgArr, compare, urlAndDevice) => {
   return `
     ${head('Compare')}
       <h1>Compare ${urlAndDevice.device} (${compare.shoot.env})</h1>
-      <div class="container">
+      <div class="container" style="${getContainerMaxWidth(urlAndDevice.device)}">
       ${trHtml(imgArr, compare, urlAndDevice)}
       </div>
       ${scripts()}
     </body>
-      
     </html>`.replace(/,/g, '');
 };
 
@@ -63,25 +72,24 @@ const trHtml = (imgArr, compare, urlAndDevice) => {
 const scripts = () => {
   return `
   <script>
- function diff() {
+    function diff() {
       const container = document.querySelector('.container');
-      container.classList.toggle('zoom3')
-      container.classList.remove('zoom1') 
-      container.classList.remove('zoom2')
+      container.classList.toggle('zoom3');
+      container.classList.remove('zoom1');
+      container.classList.remove('zoom2');
     }
     function shot() {
       const container = document.querySelector('.container');
-      container.classList.toggle('zoom2')
-      container.classList.remove('zoom1') 
-      container.classList.remove('zoom3')
+      container.classList.toggle('zoom2');
+      container.classList.remove('zoom1');
+      container.classList.remove('zoom3');
     }
     function base() {
       const container = document.querySelector('.container');
-      container.classList.toggle('zoom1')
-      container.classList.remove('zoom2') 
-      container.classList.remove('zoom3')
+      container.classList.toggle('zoom1');
+      container.classList.remove('zoom2');
+      container.classList.remove('zoom3');
     }
-      
   </script>
   `;
 };
