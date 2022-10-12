@@ -2,15 +2,9 @@ const fs = require('fs-extra');
 const mkdirp = require('mkdirp');
 const rimraf = require('rimraf');
 
-const getEnv = (env) => {
-  let output = env.split('.')[0];
-  output = output === 'danskespil' ? 'prod' : output;
-  return output;
-};
-
 const exporter = (compare) => {
   const asyncMakeHtmls = async function (compare) {
-    const outputPath = `./export/${getEnv(compare.base.env)}`;
+    const outputPath = `./export/${compare.base.env}`;
     rimraf.sync(outputPath);
     mkdirp.sync(outputPath);
 
@@ -22,9 +16,11 @@ const exporter = (compare) => {
     copyTo = `${outputPath}/shots/${compare.base.env}/${compare.base.date}`;
     fs.copy(copyFrom, copyTo);
 
-    copyFrom = `./output/shots/${compare.shoot.env}/${compare.shoot.date}`;
-    copyTo = `${outputPath}/shots/${compare.shoot.env}/${compare.shoot.date}`;
-    fs.copy(copyFrom, copyTo);
+    if (compare.base.date !== compare.shoot.date) {
+      copyFrom = `./output/shots/${compare.shoot.env}/${compare.shoot.date}`;
+      copyTo = `${outputPath}/shots/${compare.shoot.env}/${compare.shoot.date}`;
+      fs.copy(copyFrom, copyTo);
+    }
 
     const htmlFilesToCopy = ['index', 'desktop', 'ipad', 'iphone-7', 'ipad-landscape', 'ipad-pro-landscape', 'ipad', 'ipad-pro'];
 
