@@ -28,7 +28,11 @@ const css = `
 }
 
 .container > div {
-  padding: 5px
+  padding: 5px;
+}
+
+.container > div > img {
+  cursor: pointer;
 }
 
 .zoom1 {
