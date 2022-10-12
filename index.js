@@ -40,15 +40,27 @@ const loggedOutUrls = [
 
 const loggedInUrls = [...pamUrls];
 
+const tcUrls = [
+  '/',
+  '/alle-spil#/alle-spil',
+  '/tivoli-wild#/',
+  '/kampagner#/',
+];
+
+const getUrls = () => {
+  if (params.baseEnv === 'tivolicasino.dk') return tcUrls;
+  if (params.baseEnv.includes('danskespil.dk') && params.loggedIn) return loggedInUrls;
+  if (params.baseEnv.includes('danskespil.dk') && !params.loggedIn) return loggedOutUrls;
+};
+
 const compare = {
   logIn: params.loggedIn,
   el: params.el,
   base: { env: params.baseEnv, date: params.baseDate },
   shoot: { env: params.shootEnv, date: params.shootDate },
   desktopWidth: 1600,
-  // devices: ['Desktop', 'iPhone 7', 'iPad', 'iPad landscape', 'iPad Pro', 'iPad Pro landscape'],
   devices: ['Desktop', 'iPhone 7', 'iPad', 'iPad landscape'],
-  urls: params.loggedIn ? [...loggedInUrls] : [...loggedOutUrls],
+  urls: getUrls(),
 };
 
 init.init(compare);
