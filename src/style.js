@@ -27,8 +27,8 @@ const css = `
   padding-bottom: 15px;
 }
 
-.container > div:not(:nth-child(3n+3)) {
-  padding-right: 10px
+.container > div {
+  padding: 5px
 }
 
 .zoom1 {
