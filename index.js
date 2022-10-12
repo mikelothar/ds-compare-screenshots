@@ -40,12 +40,7 @@ const loggedOutUrls = [
 
 const loggedInUrls = [...pamUrls];
 
-const tcUrls = [
-  '/',
-  '/alle-spil#/alle-spil',
-  '/tivoli-wild#/',
-  '/kampagner#/',
-];
+const tcUrls = ['/', '/alle-spil#/alle-spil', '/tivoli-wild#/', '/kampagner#/'];
 
 const getUrls = () => {
   if (params.baseEnv === 'tivolicasino.dk') return tcUrls;
